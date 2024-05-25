@@ -1,20 +1,32 @@
 class Solution {
 public:
     int romanToInt(string s) {
-        int n = s.length();
-        if (n == 0) return 0;
-
-        unordered_map<char, int> roman = {
-            {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50}, 
-            {'C', 100}, {'D', 500}, {'M', 1000}
-        };
-
+        int *z = new int[s.length()];
         int r = 0;
-        for (int i = 0; i < n; ++i) {
-            if (i < n - 1 && roman[s[i]] < roman[s[i + 1]]) {
-                r -= roman[s[i]];
+
+        for(int i = 0; i < s.length(); i++) {
+            if(s[i] == 'I') {
+                z[i] = 1;
+            } else if(s[i] == 'V') {
+                z[i] = 5;
+            } else if(s[i] == 'X') {
+                z[i] = 10;
+            } else if(s[i] == 'L') {
+                z[i] = 50;
+            } else if(s[i] == 'C') {
+                z[i] = 100;
+            } else if(s[i] == 'D') {
+                z[i] = 500;
+            } else if(s[i] == 'M') {
+                z[i] = 1000;
+            }
+        }
+
+        for(int i = 0; i < s.length(); i++) {
+            if(i < s.length() - 1 && z[i] < z[i + 1]) {
+                r -= z[i];
             } else {
-                r += roman[s[i]];
+                r += z[i];
             }
         }
         return r;
